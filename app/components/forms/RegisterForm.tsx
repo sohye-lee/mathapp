@@ -93,6 +93,9 @@ export default function RegisterForm() {
           />
         </div>
         <div className="grid gap-2 grid-cols-2 md:grid-cols-4">
+          <label className="col-span-2 md:col-span-4 uppercase">
+            Choose Your Avatar
+          </label>
           {avatars.map((item, i) => (
             <div
               key={i}

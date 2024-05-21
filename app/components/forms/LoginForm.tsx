@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import useMutation from '@/app/lib/useMutation';
 import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
+import Link from 'next/link';
 
 interface LoginForm {
   username: string;
@@ -12,31 +13,35 @@ interface LoginForm {
 }
 export default function LoginForm() {
   const router = useRouter();
+  const [message, setMessage] = useState<string>();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginForm>();
 
-  const [login, { data, isLoading, error }] = useMutation(
-    '/api/auth/signin',
-    'POST'
-  );
+  // const [login, { data, isLoading, error }] = useMutation(
+  //   '/api/auth/signin',
+  //   'POST'
+  // );
 
   const onValid = async (validForm: LoginForm) => {
-    // login({ ...validForm });
-    const res = await signIn('credentials', { ...validForm });
-    if (res?.error) return;
-    router.replace('/');
+    try {
+      const res = await signIn('credentials', { ...validForm });
+      if (res?.error) {
+        setMessage(res?.error);
+        return;
+      }
+      router.replace('/');
+      setMessage(`Welcome back}!`);
+    } catch (error) {
+      setMessage((error as Error).message);
+    }
   };
-  useEffect(() => {
-    data && data?.ok && router.push('/');
-  }, [data, router]);
+
   return (
     <div>
-      {data && !data?.ok && (
-        <p className="text-purple-600 text-center mb-5">{data?.message}</p>
-      )}
+      {message && <p className="text-purple-600 text-center mb-5">{message}</p>}
       <form
         onSubmit={handleSubmit(onValid)}
         className="w-full flex flex-col gap-3"
@@ -61,7 +66,10 @@ export default function LoginForm() {
           errors={errors?.password?.message}
         />
 
-        <button type="submit">{isLoading ? 'Loading...' : 'Login'}</button>
+        <button type="submit">Login</button>
+        <Link href="/register" className="btn bg-amber-500">
+          Sign Up
+        </Link>
       </form>
     </div>
   );

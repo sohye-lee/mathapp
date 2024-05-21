@@ -1,11 +1,21 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Montserrat, Poppins, Cabin_Sketch } from 'next/font/google';
 import './globals.css';
 import Providers from './providers';
 import Image from 'next/image';
 import Navbar from './components/ui/Navbar';
 
 const inter = Inter({ subsets: ['latin'] });
+const sans = Montserrat({
+  subsets: ['latin'],
+  variable: '--font-sans',
+});
+
+const sketch = Cabin_Sketch({
+  weight: ['400', '700'],
+  subsets: ['latin'],
+  variable: '--font-sketch',
+});
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -19,16 +29,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} relative`}>
+      <body
+        className={`${inter.className} ${sans.className} ${sketch.variable} relative`}
+      >
         <Image
           src="/images/background.webp"
           alt="background"
           fill
-          className="z-1 opacity-20"
+          className="z-[0] opacity-20"
         />
         <Providers>
           <Navbar />
-          <main className="py-24 flex flex-col items-center min-h-screen px-4 z-[1000] relative">
+          <main className="pb-24 pt-32 flex flex-col items-center min-h-screen px-4 z-[1000] relative">
             {children}
           </main>
         </Providers>
