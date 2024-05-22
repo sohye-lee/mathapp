@@ -1,5 +1,11 @@
 import type { Metadata } from 'next';
-import { Inter, Montserrat, Poppins, Cabin_Sketch } from 'next/font/google';
+import {
+  Inter,
+  Montserrat,
+  Poppins,
+  Cabin_Sketch,
+  Peralta,
+} from 'next/font/google';
 import './globals.css';
 import Providers from './providers';
 import Image from 'next/image';
@@ -11,8 +17,8 @@ const sans = Montserrat({
   variable: '--font-sans',
 });
 
-const sketch = Cabin_Sketch({
-  weight: ['400', '700'],
+const sketch = Peralta({
+  weight: ['400'],
   subsets: ['latin'],
   variable: '--font-sketch',
 });
