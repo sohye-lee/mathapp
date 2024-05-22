@@ -18,7 +18,6 @@ export default function GamePage() {
 
   useEffect(() => {
     const newPlays = randomArray.map<Play>((num, i) => ({
-      //   step: i,
       level: Number(level),
       question: num,
       answer: null,
