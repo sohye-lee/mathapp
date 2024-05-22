@@ -49,3 +49,11 @@ export interface SignUpCredentials {
   email?: string;
   avatar?: string;
 }
+
+export interface Play {
+  // step?: number;
+  level: number;
+  question: number;
+  answer: number | null;
+  correct: boolean | null;
+}
