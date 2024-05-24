@@ -1,8 +1,5 @@
 import db from '@/prisma/db';
-import { SignUpCredentials } from '@/types/types';
 import { NextRequest, NextResponse } from 'next/server';
-import bcrypt from 'bcrypt';
-import crypto from 'crypto';
 
 export const GET = async (req: NextRequest) => {
   try {
